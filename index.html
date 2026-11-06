@@ -31,7 +31,7 @@
         }
     </script>
     <style>
-        /* Custom scrollbar for sleeker UI */
+        /* Custom scrollbar */
         ::-webkit-scrollbar {
             width: 8px;
             height: 8px;
@@ -46,7 +46,7 @@
         ::-webkit-scrollbar-thumb:hover {
             background: #94a3b8;
         }
-        /* Disable video right click & download options overlays */
+        /* Disable video right-click & direct downloads */
         video::-internal-media-controls-download-button {
             display:none;
         }
@@ -78,7 +78,7 @@
                     <span class="bg-gray-900 text-white text-xs font-bold px-2 py-0.5 rounded tracking-wide uppercase">LMS Portal</span>
                 </div>
 
-                <!-- Navigation Links -->
+                <!-- Desktop Navigation Links -->
                 <nav class="hidden md:flex items-center space-x-6 text-sm font-medium">
                     <button onclick="navigateTo('home')" class="nav-link text-gray-600 hover:text-ebay-blue transition-colors">Home</button>
                     <button onclick="navigateTo('portal')" class="nav-link text-gray-600 hover:text-ebay-blue transition-colors">Video Academy</button>
@@ -87,38 +87,62 @@
                     </button>
                 </nav>
 
-                <!-- Auth Status / Actions -->
-                <div class="flex items-center space-x-3" id="nav-auth-container">
-                    <!-- Populated dynamically by JavaScript -->
+                <!-- Auth Actions & Mobile Hamburger -->
+                <div class="flex items-center space-x-3">
+                    <div class="hidden sm:flex items-center space-x-3" id="nav-auth-container">
+                        <!-- Dynamic JS Content -->
+                    </div>
+
+                    <!-- Mobile Hamburger Button -->
+                    <button onclick="toggleMobileMenu()" class="md:hidden p-2 text-gray-600 hover:text-gray-900 focus:outline-none">
+                        <i class="fa-solid fa-bars text-xl" id="hamburger-icon"></i>
+                    </button>
                 </div>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-gray-200 px-4 pt-2 pb-4 space-y-2">
+            <button onclick="navigateTo('home'); toggleMobileMenu();" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100">
+                <i class="fa-solid fa-house mr-2"></i> Home
+            </button>
+            <button onclick="navigateTo('portal'); toggleMobileMenu();" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100">
+                <i class="fa-solid fa-video mr-2"></i> Video Academy
+            </button>
+            <button onclick="navigateTo('admin'); toggleMobileMenu();" id="mobile-nav-admin-link" class="hidden w-full text-left px-3 py-2 rounded-md text-base font-medium text-purple-700 bg-purple-50 hover:bg-purple-100">
+                <i class="fa-solid fa-user-shield mr-2"></i> Admin Console
+            </button>
+            
+            <hr class="my-2 border-gray-200">
+            
+            <div id="mobile-auth-container" class="pt-1">
+                <!-- Dynamic Auth Buttons for Mobile -->
             </div>
         </div>
     </header>
 
-    <!-- CONTENT WRAPPER CONTAINER -->
+    <!-- CONTENT WRAPPER -->
     <main class="flex-grow">
         
-        <!-- ================= PAGE 1: HOME PAGE ================= -->
+        <!-- PAGE 1: HOME PAGE -->
         <section id="page-home" class="page-view animate-fade-in">
-            <!-- Hero Section -->
             <div class="relative bg-gradient-to-r from-gray-900 via-gray-800 to-slate-900 text-white overflow-hidden py-16 lg:py-24">
-                <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#3b82f6_1px,transparent_1px)] [background-size:16px_16px]"></div>
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                     <div class="grid md:grid-cols-2 gap-12 items-center">
                         <div>
                             <div class="inline-flex items-center space-x-2 bg-ebay-blue/20 border border-ebay-blue/40 px-3 py-1 rounded-full text-ebay-blue text-xs font-semibold mb-4">
                                 <i class="fa-solid fa-graduation-cap"></i>
-                                <span>Official Seller Mastery Program</span>
+                                <span>Official Seller Program</span>
                             </div>
                             <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight leading-tight mb-6">
-                                Master Selling on <span class="text-ebay-blue">e</span><span class="text-ebay-red">B</span><span class="text-ebay-yellow">a</span><span class="text-ebay-green">y</span> Like a Top-Rated Pro
+                                Master Selling on <span class="text-ebay-blue">e</span><span class="text-ebay-red">B</span><span class="text-ebay-yellow">a</span><span class="text-ebay-green">y</span>
                             </h1>
                             <p class="text-gray-300 text-lg mb-8 leading-relaxed">
-                                Unlock high-profit item sourcing, store optimization, SEO listing techniques, and international shipping strategies through structured high-definition video lessons.
+                                Learn high-profit product sourcing, listing optimization, and store expansion strategies. Register today to access approved video modules.
                             </p>
-                            <div class="flex flex-wrap gap-4" id="hero-action-buttons">
-                                <button onclick="navigateTo('register')" class="bg-ebay-blue hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5">
-                                    Start Learning Today
+                            <div class="flex flex-wrap gap-4">
+                                <button onclick="navigateTo('register')" class="bg-ebay-blue hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-lg shadow transition-all">
+                                    Register as Student
                                 </button>
                                 <button onclick="navigateTo('login')" class="bg-white/10 hover:bg-white/20 text-white font-semibold px-6 py-3 rounded-lg border border-white/20 backdrop-blur-sm transition-all">
                                     Student Login
@@ -127,66 +151,19 @@
                         </div>
                         <div class="relative">
                             <div class="bg-gradient-to-tr from-ebay-blue to-purple-600 rounded-2xl p-1 shadow-2xl">
-                                <div class="bg-gray-900 rounded-xl overflow-hidden shadow-inner">
-                                    <div class="p-4 bg-gray-800 flex items-center justify-between border-b border-gray-700">
-                                        <div class="flex space-x-2">
-                                            <span class="w-3 h-3 bg-red-500 rounded-full"></span>
-                                            <span class="w-3 h-3 bg-yellow-500 rounded-full"></span>
-                                            <span class="w-3 h-3 bg-green-500 rounded-full"></span>
-                                        </div>
-                                        <span class="text-xs text-gray-400 font-mono">ebay-lms-preview.mp4</span>
-                                    </div>
-                                    <div class="relative group cursor-pointer" onclick="navigateTo('portal')">
-                                        <img src="https://images.unsplash.com/photo-1556742049-0a674640c66d?auto=format&fit=crop&w=1000&q=80" alt="Course Preview" class="w-full h-64 sm:h-80 object-cover group-hover:scale-105 transition-transform duration-500 opacity-80">
-                                        <div class="absolute inset-0 flex items-center justify-center bg-black/40 group-hover:bg-black/20 transition-colors">
-                                            <div class="w-16 h-16 bg-ebay-blue text-white rounded-full flex items-center justify-center text-xl shadow-xl transform group-hover:scale-110 transition-transform">
-                                                <i class="fa-solid fa-play ml-1"></i>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <div class="bg-gray-900 rounded-xl overflow-hidden shadow-inner p-6 text-center">
+                                    <i class="fa-solid fa-circle-play text-6xl text-ebay-blue mb-4"></i>
+                                    <h3 class="text-xl font-bold text-white mb-2">Video Academy Portal</h3>
+                                    <p class="text-xs text-gray-400">Exclusive streaming portal for approved students.</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <!-- Features Highlights -->
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-                <div class="text-center max-w-3xl mx-auto mb-12">
-                    <h2 class="text-3xl font-bold text-gray-900 mb-4">Why Train With eBay LMS?</h2>
-                    <p class="text-gray-600">Our streamlined curriculum is focused purely on actionable video tutorials without distraction.</p>
-                </div>
-
-                <div class="grid md:grid-cols-3 gap-8">
-                    <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
-                        <div class="w-12 h-12 bg-blue-100 text-ebay-blue rounded-lg flex items-center justify-center text-xl mb-4">
-                            <i class="fa-solid fa-box-archive"></i>
-                        </div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-2">Listing Optimization</h3>
-                        <p class="text-gray-600 text-sm">Learn Cassini algorithm search ranking hacks to put your products on page one of eBay search results.</p>
-                    </div>
-
-                    <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
-                        <div class="w-12 h-12 bg-green-100 text-ebay-green rounded-lg flex items-center justify-center text-xl mb-4">
-                            <i class="fa-solid fa-chart-line"></i>
-                        </div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-2">High Profit Sourcing</h3>
-                        <p class="text-gray-600 text-sm">Discover how to source liquidation inventory, wholesale goods, and thrifting flips for maximum margins.</p>
-                    </div>
-
-                    <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
-                        <div class="w-12 h-12 bg-purple-100 text-purple-600 rounded-lg flex items-center justify-center text-xl mb-4">
-                            <i class="fa-solid fa-shield-halved"></i>
-                        </div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-2">Secure Learning Portal</h3>
-                        <p class="text-gray-600 text-sm">Exclusive access for approved students. Stream content directly on web with protected player controls.</p>
-                    </div>
-                </div>
-            </div>
         </section>
 
-        <!-- ================= PAGE 2: STUDENT REGISTRATION ================= -->
+        <!-- PAGE 2: STUDENT REGISTRATION -->
         <section id="page-register" class="page-view hidden py-12">
             <div class="max-w-md mx-auto px-4">
                 <div class="bg-white p-8 rounded-2xl shadow-xl border border-gray-100">
@@ -198,58 +175,58 @@
                     <form id="register-form" onsubmit="handleRegister(event)" class="space-y-4">
                         <div>
                             <label class="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">Full Name</label>
-                            <input type="text" id="reg-name" required placeholder="John Doe" class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-ebay-blue focus:border-transparent outline-none transition-all">
+                            <input type="text" id="reg-name" required placeholder="Full Name" class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-ebay-blue outline-none">
                         </div>
 
                         <div>
                             <label class="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">Email Address</label>
-                            <input type="email" id="reg-email" required placeholder="student@example.com" class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-ebay-blue focus:border-transparent outline-none transition-all">
+                            <input type="email" id="reg-email" required placeholder="student@example.com" class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-ebay-blue outline-none">
                         </div>
 
                         <div>
                             <label class="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">Password</label>
-                            <input type="password" id="reg-password" required placeholder="••••••••" class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-ebay-blue focus:border-transparent outline-none transition-all">
+                            <input type="password" id="reg-password" required placeholder="••••••••" class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-ebay-blue outline-none">
                         </div>
 
                         <div class="bg-amber-50 border border-amber-200 rounded-lg p-3 text-xs text-amber-800 flex items-start space-x-2">
-                            <i class="fa-solid fa-triangle-exclamation text-amber-500 mt-0.5"></i>
-                            <span>Note: New student registrations require manual verification by an Administrator before video access is granted.</span>
+                            <i class="fa-solid fa-clock text-amber-500 mt-0.5"></i>
+                            <span>Note: Your account will be created in <b>Pending</b> status and requires Administrator approval before you can watch videos.</span>
                         </div>
 
-                        <button type="submit" class="w-full bg-ebay-blue hover:bg-blue-700 text-white font-semibold py-3 rounded-lg shadow hover:shadow-md transition-all">
+                        <button type="submit" class="w-full bg-ebay-blue hover:bg-blue-700 text-white font-semibold py-3 rounded-lg shadow transition-all">
                             Submit Registration
                         </button>
                     </form>
 
                     <div class="mt-6 text-center text-sm text-gray-600">
-                        Already have an account? 
+                        Already registered? 
                         <button onclick="navigateTo('login')" class="text-ebay-blue font-semibold hover:underline">Log in here</button>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- ================= PAGE 3: STUDENT & ADMIN LOGIN ================= -->
+        <!-- PAGE 3: STUDENT & ADMIN LOGIN -->
         <section id="page-login" class="page-view hidden py-12">
             <div class="max-w-md mx-auto px-4">
                 <div class="bg-white p-8 rounded-2xl shadow-xl border border-gray-100">
                     <div class="text-center mb-6">
                         <h2 class="text-2xl font-bold text-gray-900" id="login-form-heading">Sign In to LMS</h2>
-                        <p class="text-sm text-gray-500 mt-1" id="login-form-subheading">Access your eBay student learning portal</p>
+                        <p class="text-sm text-gray-500 mt-1" id="login-form-subheading">Access your student learning portal</p>
                     </div>
 
                     <form id="login-form" onsubmit="handleLogin(event)" class="space-y-4">
                         <div>
                             <label class="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">Email Address</label>
-                            <input type="email" id="login-email" required placeholder="user@example.com" class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-ebay-blue focus:border-transparent outline-none transition-all">
+                            <input type="email" id="login-email" required placeholder="user@example.com" class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-ebay-blue outline-none">
                         </div>
 
                         <div>
                             <label class="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">Password</label>
-                            <input type="password" id="login-password" required placeholder="••••••••" class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-ebay-blue focus:border-transparent outline-none transition-all">
+                            <input type="password" id="login-password" required placeholder="••••••••" class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-ebay-blue outline-none">
                         </div>
 
-                        <button type="submit" class="w-full bg-ebay-blue hover:bg-blue-700 text-white font-semibold py-3 rounded-lg shadow hover:shadow-md transition-all">
+                        <button type="submit" class="w-full bg-ebay-blue hover:bg-blue-700 text-white font-semibold py-3 rounded-lg shadow transition-all">
                             Log In
                         </button>
                     </form>
@@ -257,7 +234,7 @@
                     <div class="mt-6 flex items-center justify-between text-xs text-gray-600">
                         <div>
                             Need an account? 
-                            <button onclick="navigateTo('register')" class="text-ebay-blue font-semibold hover:underline">Register as Student</button>
+                            <button onclick="navigateTo('register')" class="text-ebay-blue font-semibold hover:underline">Register</button>
                         </div>
                         <div>
                             <button onclick="toggleAdminLoginView()" id="admin-mode-toggle-btn" class="text-gray-400 hover:text-gray-600 font-medium transition-colors">
@@ -269,16 +246,16 @@
             </div>
         </section>
 
-        <!-- ================= PAGE 4: PENDING / REJECTED STATUS SCREEN ================= -->
+        <!-- PAGE 4: STATUS NOTICE SCREEN -->
         <section id="page-status-screen" class="page-view hidden py-16">
             <div class="max-w-lg mx-auto px-4 text-center">
-                <div id="status-pending-box" class="bg-white p-8 rounded-2xl shadow-xl border border-amber-200 text-center">
+                <div id="status-pending-box" class="bg-white p-8 rounded-2xl shadow-xl border border-amber-200">
                     <div class="w-20 h-20 bg-amber-100 text-amber-500 rounded-full flex items-center justify-center text-3xl mx-auto mb-5 animate-pulse">
                         <i class="fa-solid fa-clock"></i>
                     </div>
                     <h2 class="text-2xl font-bold text-gray-900 mb-2">Approval Pending</h2>
                     <p class="text-gray-600 text-sm mb-6">
-                        Your account registration has been received successfully! Our Administrator must approve your registration before you can watch video lessons.
+                        Your account has been registered successfully! An Administrator must approve your account before you can watch video lessons.
                     </p>
                     <div class="bg-amber-50 rounded-lg p-4 mb-6 text-left border border-amber-200">
                         <div class="text-xs text-amber-800 font-semibold mb-1">Account Summary:</div>
@@ -295,13 +272,13 @@
                     </div>
                 </div>
 
-                <div id="status-blocked-box" class="hidden bg-white p-8 rounded-2xl shadow-xl border border-red-200 text-center">
+                <div id="status-blocked-box" class="hidden bg-white p-8 rounded-2xl shadow-xl border border-red-200">
                     <div class="w-20 h-20 bg-red-100 text-red-500 rounded-full flex items-center justify-center text-3xl mx-auto mb-5">
                         <i class="fa-solid fa-ban"></i>
                     </div>
-                    <h2 class="text-2xl font-bold text-gray-900 mb-2">Access Denied</h2>
+                    <h2 class="text-2xl font-bold text-gray-900 mb-2">Access Restricted</h2>
                     <p class="text-gray-600 text-sm mb-6">
-                        Your student account has been <span class="font-bold text-red-600" id="status-blocked-reason">rejected or blocked</span> by the system administrator.
+                        Your account has been <span class="font-bold text-red-600" id="status-blocked-reason">rejected or blocked</span> by the system administrator.
                     </p>
                     <button onclick="logout()" class="bg-gray-800 hover:bg-gray-900 text-white text-sm font-medium px-6 py-2.5 rounded-lg transition-colors">
                         Return to Sign In
@@ -310,7 +287,7 @@
             </div>
         </section>
 
-        <!-- ================= PAGE 5: ADMIN DASHBOARD ================= -->
+        <!-- PAGE 5: ADMIN DASHBOARD -->
         <section id="page-admin" class="page-view hidden py-8">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 
@@ -320,17 +297,14 @@
                         <span class="text-xs font-bold uppercase tracking-wider text-purple-600 bg-purple-100 px-2.5 py-1 rounded">Control Panel</span>
                         <h1 class="text-3xl font-extrabold text-gray-900 mt-1">Administrator Dashboard</h1>
                     </div>
-                    <div class="flex items-center space-x-3">
-                        <button onclick="openChangePasswordModal()" class="text-xs bg-purple-600 hover:bg-purple-700 text-white font-semibold px-3 py-2 rounded-lg transition-colors flex items-center">
+                    <div>
+                        <button onclick="openChangePasswordModal()" class="text-xs bg-purple-600 hover:bg-purple-700 text-white font-semibold px-3.5 py-2 rounded-lg transition-colors flex items-center">
                             <i class="fa-solid fa-key mr-1.5"></i> Change Admin Password
-                        </button>
-                        <button onclick="triggerSampleDataReset()" class="text-xs bg-gray-200 hover:bg-gray-300 text-gray-700 px-3 py-2 rounded-lg transition-colors">
-                            <i class="fa-solid fa-rotate-left mr-1"></i> Reset Demo Data
                         </button>
                     </div>
                 </div>
 
-                <!-- Stats Overview Cards -->
+                <!-- Stats Cards -->
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
                     <div class="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm flex items-center justify-between">
                         <div>
@@ -363,16 +337,15 @@
                     </div>
                 </div>
 
-                <!-- Admin Tabs Grid -->
+                <!-- Admin Management Grid -->
                 <div class="grid lg:grid-cols-3 gap-8">
                     
-                    <!-- Left 2 Cols: Student User Management Table -->
+                    <!-- Left: Registered Students Table -->
                     <div class="lg:col-span-2 bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden flex flex-col">
                         <div class="p-5 bg-gray-50 border-b border-gray-200 flex justify-between items-center">
                             <h2 class="text-lg font-bold text-gray-900 flex items-center">
-                                <i class="fa-solid fa-users-gear text-ebay-blue mr-2"></i> Registered Students Management
+                                <i class="fa-solid fa-users-gear text-ebay-blue mr-2"></i> Student Approvals & User Control
                             </h2>
-                            <span class="text-xs text-gray-500">Real-time Persistence</span>
                         </div>
 
                         <div class="overflow-x-auto flex-grow">
@@ -385,13 +358,13 @@
                                     </tr>
                                 </thead>
                                 <tbody id="admin-students-table-body" class="divide-y divide-gray-200 text-sm">
-                                    <!-- Dynamic content loaded here -->
+                                    <!-- Dynamic rows loaded here -->
                                 </tbody>
                             </table>
                         </div>
                     </div>
 
-                    <!-- Right 1 Col: Video Upload & Listing -->
+                    <!-- Right: Local MP4 Video Uploader -->
                     <div class="bg-white rounded-2xl border border-gray-200 shadow-sm p-6">
                         <h2 class="text-lg font-bold text-gray-900 mb-4 flex items-center">
                             <i class="fa-solid fa-cloud-arrow-up text-ebay-blue mr-2"></i> Upload Video Lesson
@@ -399,31 +372,30 @@
 
                         <form id="video-upload-form" onsubmit="handleVideoUpload(event)" class="space-y-4 mb-6">
                             <div>
-                                <label class="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">Video Title</label>
-                                <input type="text" id="video-title" required placeholder="e.g. Lesson 1: Product Research" class="w-full px-3 py-2 text-sm rounded-lg border border-gray-300 focus:ring-2 focus:ring-ebay-blue outline-none">
+                                <label class="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">Lesson Title</label>
+                                <input type="text" id="video-title" required placeholder="e.g. Module 1: Product Research" class="w-full px-3 py-2 text-sm rounded-lg border border-gray-300 focus:ring-2 focus:ring-ebay-blue outline-none">
                             </div>
 
                             <div>
                                 <label class="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">Description</label>
-                                <textarea id="video-desc" rows="2" placeholder="Brief summary of this lesson..." class="w-full px-3 py-2 text-sm rounded-lg border border-gray-300 focus:ring-2 focus:ring-ebay-blue outline-none"></textarea>
+                                <textarea id="video-desc" rows="2" placeholder="Brief lesson description..." class="w-full px-3 py-2 text-sm rounded-lg border border-gray-300 focus:ring-2 focus:ring-ebay-blue outline-none"></textarea>
                             </div>
 
                             <div>
-                                <label class="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">Select MP4 Video File</label>
-                                <input type="file" id="video-file" accept="video/mp4,video/*" class="w-full text-xs text-gray-500 file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-ebay-blue file:text-white hover:file:bg-blue-700 cursor-pointer">
-                                <p class="text-[11px] text-gray-400 mt-1">Direct upload (Blob storage) or select a sample stream below.</p>
+                                <label class="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">Select MP4 File</label>
+                                <input type="file" id="video-file" required accept="video/mp4,video/*" class="w-full text-xs text-gray-500 file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-ebay-blue file:text-white hover:file:bg-blue-700 cursor-pointer">
                             </div>
 
-                            <button type="submit" class="w-full bg-ebay-blue hover:bg-blue-700 text-white font-semibold py-2.5 rounded-lg shadow text-sm transition-all flex items-center justify-center">
+                            <button type="submit" id="upload-btn" class="w-full bg-ebay-blue hover:bg-blue-700 text-white font-semibold py-2.5 rounded-lg shadow text-sm transition-all flex items-center justify-center">
                                 <i class="fa-solid fa-plus mr-1.5"></i> Publish Video Lesson
                             </button>
                         </form>
 
                         <hr class="my-6 border-gray-200">
 
-                        <h3 class="text-sm font-bold text-gray-800 mb-3">Published Lessons (<span id="admin-video-count">0</span>)</h3>
+                        <h3 class="text-sm font-bold text-gray-800 mb-3">Uploaded Videos (<span id="admin-video-count">0</span>)</h3>
                         <div id="admin-videos-list" class="space-y-3 max-h-60 overflow-y-auto pr-1">
-                            <!-- Dynamic video items list -->
+                            <!-- Dynamic video items -->
                         </div>
                     </div>
 
@@ -431,66 +403,53 @@
             </div>
         </section>
 
-        <!-- ================= PAGE 6: VIDEO LEARNING PORTAL (APPROVED STUDENTS ONLY) ================= -->
+        <!-- PAGE 6: VIDEO LEARNING PORTAL (APPROVED STUDENTS ONLY) -->
         <section id="page-portal" class="page-view hidden py-8">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 
-                <!-- Portal Banner Header -->
-                <div class="bg-gradient-to-r from-ebay-blue to-indigo-900 rounded-2xl p-6 md:p-8 text-white mb-8 shadow-lg flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                <div class="bg-gradient-to-r from-ebay-blue to-indigo-900 rounded-2xl p-6 text-white mb-8 shadow-lg flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                     <div>
                         <div class="inline-flex items-center space-x-2 bg-white/20 px-3 py-0.5 rounded-full text-xs font-medium text-white mb-2">
                             <i class="fa-solid fa-circle-check text-green-400"></i>
                             <span>Verified Approved Student Access</span>
                         </div>
                         <h1 class="text-2xl sm:text-3xl font-extrabold">eBay Seller Video Academy</h1>
-                        <p class="text-blue-100 text-sm mt-1">Select a video lesson from the curriculum sidebar to start watching.</p>
                     </div>
                 </div>
 
-                <!-- Main Player Layout Grid -->
                 <div class="grid lg:grid-cols-3 gap-8">
-                    
-                    <!-- Left 2 Cols: Main Player Area -->
+                    <!-- Main Video Player -->
                     <div class="lg:col-span-2 space-y-4">
                         <div class="bg-black rounded-2xl overflow-hidden shadow-2xl relative border border-gray-800">
-                            <!-- Custom Secured HTML5 Video Player -->
                             <video 
                                 id="main-video-player" 
                                 class="w-full aspect-video object-contain"
                                 controls 
                                 controlsList="nodownload" 
-                                oncontextmenu="return false;"
-                                poster="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80">
+                                oncontextmenu="return false;">
                                 Your browser does not support HTML5 video playback.
                             </video>
                         </div>
 
-                        <!-- Active Video Information -->
                         <div class="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm">
-                            <div class="flex items-center justify-between flex-wrap gap-2 mb-2">
-                                <h2 class="text-2xl font-bold text-gray-900" id="player-title">Select a Video Lesson</h2>
-                                <span class="bg-blue-100 text-ebay-blue text-xs font-semibold px-2.5 py-1 rounded-full flex items-center">
-                                    <i class="fa-solid fa-lock text-[10px] mr-1"></i> Protected Stream
-                                </span>
-                            </div>
+                            <h2 class="text-2xl font-bold text-gray-900 mb-2" id="player-title">Select a Lesson</h2>
                             <p class="text-gray-600 text-sm leading-relaxed" id="player-description">
-                                Click on any available lesson on the right to start playback in high definition.
+                                Choose a video lesson from the curriculum sidebar to watch.
                             </p>
                         </div>
                     </div>
 
-                    <!-- Right 1 Col: Video Playlist Sidebar -->
+                    <!-- Video Playlist Sidebar -->
                     <div class="bg-white rounded-2xl border border-gray-200 shadow-sm p-5 flex flex-col h-fit">
                         <h3 class="text-base font-bold text-gray-900 mb-4 pb-3 border-b border-gray-100 flex items-center justify-between">
-                            <span>Course Content</span>
-                            <span class="text-xs bg-gray-100 px-2 py-0.5 rounded text-gray-600 font-normal" id="playlist-count font-mono">0 Videos</span>
+                            <span>Available Lessons</span>
+                            <span class="text-xs bg-gray-100 px-2 py-0.5 rounded text-gray-600" id="playlist-count">0 Videos</span>
                         </h3>
 
                         <div id="student-playlist" class="space-y-3 max-h-[500px] overflow-y-auto pr-1">
-                            <!-- Dynamically generated video list buttons -->
+                            <!-- Dynamically loaded lessons -->
                         </div>
                     </div>
-
                 </div>
 
             </div>
@@ -500,7 +459,7 @@
 
     <!-- ADMIN CHANGE PASSWORD MODAL -->
     <div id="password-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-gray-100 animate-fade-in">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-gray-100">
             <div class="flex justify-between items-center mb-4 border-b border-gray-100 pb-3">
                 <h3 class="text-lg font-bold text-gray-900 flex items-center">
                     <i class="fa-solid fa-shield-halved text-purple-600 mr-2"></i> Change Admin Password
@@ -526,7 +485,7 @@
 
                 <div class="flex justify-end space-x-2 pt-2">
                     <button type="button" onclick="closeChangePasswordModal()" class="px-4 py-2 rounded-lg border border-gray-200 text-xs font-semibold text-gray-600 hover:bg-gray-50">Cancel</button>
-                    <button type="submit" class="px-4 py-2 rounded-lg bg-purple-600 hover:bg-purple-700 text-white text-xs font-semibold shadow">Save New Password</button>
+                    <button type="submit" class="px-4 py-2 rounded-lg bg-purple-600 hover:bg-purple-700 text-white text-xs font-semibold shadow">Save Password</button>
                 </div>
             </form>
         </div>
@@ -535,80 +494,98 @@
     <!-- FOOTER -->
     <footer class="bg-white border-t border-gray-200 py-6 mt-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center text-xs text-gray-500 gap-4">
-            <div class="flex items-center space-x-2">
-                <span class="font-bold text-gray-700">eBay LMS Platform</span>
-                <span>&bull;</span>
-                <span>Production Learning Portal</span>
+            <div>
+                <span class="font-bold text-gray-700">eBay LMS Platform</span> &bull; Learning Management System
             </div>
             <div>
-                &copy; <span id="copyright-year">2026</span> eBay Masterclass LMS. All rights reserved.
+                &copy; <span id="copyright-year">2026</span> eBay Mastery LMS.
             </div>
         </div>
     </footer>
 
-    <!-- INTERACTIVE JAVASCRIPT APP LOGIC -->
+    <!-- INTERACTIVE SCRIPT -->
     <script>
-        // ================= APP INITIAL STATE & SEED DATA =================
+        // DEFAULT ADMIN SETUP
         const DEFAULT_ADMIN = {
             email: 'admin@ebaylms.com',
             password: 'admin123'
         };
 
-        const INITIAL_STUDENTS = [
-            { id: 'std-101', name: 'Alex Johnson', email: 'alex@example.com', password: 'password123', status: 'approved' },
-            { id: 'std-102', name: 'Sarah Connor', email: 'sarah@example.com', password: 'password123', status: 'pending' },
-            { id: 'std-103', name: 'Michael Scott', email: 'michael@example.com', password: 'password123', status: 'pending' },
-            { id: 'std-104', name: 'David Miller', email: 'david@example.com', password: 'password123', status: 'blocked' }
-        ];
-
-        const INITIAL_VIDEOS = [
-            {
-                id: 'vid-1',
-                title: '1. eBay Seller Account Setup & Rules',
-                description: 'Complete walkthrough on creating a business seller account, configuring store policies, and avoiding initial restriction flags.',
-                url: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4'
-            },
-            {
-                id: 'vid-2',
-                title: '2. Sourcing High Profit Margin Items',
-                description: 'Learn how to identify top-selling products, calculate net profit after eBay and PayPal fees, and source wholesale inventory.',
-                url: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4'
-            },
-            {
-                id: 'vid-3',
-                title: '3. Cassini SEO & Product Title Hacking',
-                description: 'Master eBay Cassini search engine algorithm. Keywords strategy, item specifics, and high-converting listing graphics.',
-                url: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4'
-            }
-        ];
-
-        // State Store
         let state = {
             adminCredentials: { ...DEFAULT_ADMIN },
-            currentUser: null, // { role: 'admin'|'student', email, name, status }
+            currentUser: null,
             students: [],
             videos: [],
             activeVideoId: null,
             isAdminLoginMode: false
         };
 
-        // ================= PERSISTENCE HELPERS =================
+        // INDEXEDDB ENGINE FOR LARGE VIDEO FILES
+        let db;
+        function initIndexedDB() {
+            return new Promise((resolve, reject) => {
+                const request = indexedDB.open('eBayLMS_DB', 1);
+                request.onupgradeneeded = function(e) {
+                    const database = e.target.result;
+                    if (!database.objectStoreNames.contains('videos')) {
+                        database.createObjectStore('videos', { keyPath: 'id' });
+                    }
+                };
+                request.onsuccess = function(e) {
+                    db = e.target.result;
+                    resolve(db);
+                };
+                request.onerror = function(e) {
+                    console.error("IndexedDB Error:", e);
+                    reject(e);
+                };
+            });
+        }
+
+        function saveVideoToIDB(videoData) {
+            return new Promise((resolve, reject) => {
+                const tx = db.transaction('videos', 'readwrite');
+                const store = tx.objectStore('videos');
+                const req = store.put(videoData);
+                req.onsuccess = () => resolve();
+                req.onerror = (e) => reject(e);
+            });
+        }
+
+        function getVideosFromIDB() {
+            return new Promise((resolve, reject) => {
+                const tx = db.transaction('videos', 'readonly');
+                const store = tx.objectStore('videos');
+                const req = store.getAll();
+                req.onsuccess = (e) => resolve(e.target.result || []);
+                req.onerror = (e) => reject(e);
+            });
+        }
+
+        function deleteVideoFromIDB(id) {
+            return new Promise((resolve, reject) => {
+                const tx = db.transaction('videos', 'readwrite');
+                const store = tx.objectStore('videos');
+                const req = store.delete(id);
+                req.onsuccess = () => resolve();
+                req.onerror = (e) => reject(e);
+            });
+        }
+
+        // STATE MANAGERS
         function loadState() {
             try {
                 const storedAdmin = localStorage.getItem('ebay_lms_admin');
                 const storedStudents = localStorage.getItem('ebay_lms_students');
-                const storedVideos = localStorage.getItem('ebay_lms_videos');
                 const storedUser = localStorage.getItem('ebay_lms_session');
 
                 state.adminCredentials = storedAdmin ? JSON.parse(storedAdmin) : DEFAULT_ADMIN;
-                state.students = storedStudents ? JSON.parse(storedStudents) : INITIAL_STUDENTS;
-                state.videos = storedVideos ? JSON.parse(storedVideos) : INITIAL_VIDEOS;
+                state.students = storedStudents ? JSON.parse(storedStudents) : [];
                 state.currentUser = storedUser ? JSON.parse(storedUser) : null;
             } catch (e) {
                 console.error("Storage load error:", e);
                 state.adminCredentials = DEFAULT_ADMIN;
-                state.students = INITIAL_STUDENTS;
-                state.videos = INITIAL_VIDEOS;
+                state.students = [];
             }
         }
 
@@ -616,7 +593,6 @@
             try {
                 localStorage.setItem('ebay_lms_admin', JSON.stringify(state.adminCredentials));
                 localStorage.setItem('ebay_lms_students', JSON.stringify(state.students));
-                localStorage.setItem('ebay_lms_videos', JSON.stringify(state.videos));
                 if (state.currentUser) {
                     localStorage.setItem('ebay_lms_session', JSON.stringify(state.currentUser));
                 } else {
@@ -627,20 +603,19 @@
             }
         }
 
-        function triggerSampleDataReset() {
-            if (confirm("Reset all students, videos, and admin password to initial setup?")) {
-                state.adminCredentials = { ...DEFAULT_ADMIN };
-                state.students = [...INITIAL_STUDENTS];
-                state.videos = [...INITIAL_VIDEOS];
-                saveState();
-                renderApp();
-                showToast("Demo data and admin credentials reset successfully", "success");
+        // NAVIGATION
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const icon = document.getElementById('hamburger-icon');
+            menu.classList.toggle('hidden');
+            if (menu.classList.contains('hidden')) {
+                icon.className = 'fa-solid fa-bars text-xl';
+            } else {
+                icon.className = 'fa-solid fa-xmark text-xl';
             }
         }
 
-        // ================= ROUTING / PAGE NAVIGATION =================
         function navigateTo(pageId) {
-            // Security Gatekeeping
             if (pageId === 'admin') {
                 if (!state.currentUser || state.currentUser.role !== 'admin') {
                     showToast("Access Denied: Admin privileges required", "error");
@@ -651,7 +626,7 @@
 
             if (pageId === 'portal') {
                 if (!state.currentUser) {
-                    showToast("Please log in to access the Video Portal", "warning");
+                    showToast("Please sign in to access the Video Academy", "warning");
                     navigateTo('login');
                     return;
                 }
@@ -661,37 +636,37 @@
                 }
             }
 
-            // Hide all pages
             document.querySelectorAll('.page-view').forEach(el => el.classList.add('hidden'));
 
-            // Show selected page
             const targetPage = document.getElementById(`page-${pageId}`);
             if (targetPage) {
                 targetPage.classList.remove('hidden');
                 window.scrollTo(0, 0);
             }
 
-            // Refresh layout renders
             renderNavbar();
             if (pageId === 'admin') renderAdminDashboard();
             if (pageId === 'portal') renderPortal();
             if (pageId === 'status-screen') renderStatusScreen();
         }
 
-        // ================= NAVBAR UI RENDER =================
+        // RENDER NAVBAR & AUTH
         function renderNavbar() {
             const container = document.getElementById('nav-auth-container');
+            const mobileContainer = document.getElementById('mobile-auth-container');
             const adminLink = document.getElementById('nav-admin-link');
+            const mobileAdminLink = document.getElementById('mobile-nav-admin-link');
 
             if (state.currentUser) {
-                // Admin link visibility
                 if (state.currentUser.role === 'admin') {
                     adminLink.classList.remove('hidden');
+                    mobileAdminLink.classList.remove('hidden');
                 } else {
                     adminLink.classList.add('hidden');
+                    mobileAdminLink.classList.add('hidden');
                 }
 
-                container.innerHTML = `
+                const userHTML = `
                     <div class="flex items-center space-x-3">
                         <div class="text-right hidden sm:block">
                             <div class="text-xs font-bold text-gray-900">${escapeHtml(state.currentUser.name || 'Admin')}</div>
@@ -702,9 +677,22 @@
                         </button>
                     </div>
                 `;
+
+                container.innerHTML = userHTML;
+                mobileContainer.innerHTML = `
+                    <div class="p-2 border-t border-gray-100">
+                        <div class="text-sm font-bold text-gray-800">${escapeHtml(state.currentUser.name || 'Admin')}</div>
+                        <div class="text-xs text-gray-500 mb-2 capitalize">${state.currentUser.role}</div>
+                        <button onclick="logout(); toggleMobileMenu();" class="w-full text-left py-2 text-sm text-red-600 font-semibold">
+                            <i class="fa-solid fa-right-from-bracket mr-1"></i> Log Out
+                        </button>
+                    </div>
+                `;
             } else {
                 adminLink.classList.add('hidden');
-                container.innerHTML = `
+                mobileAdminLink.classList.add('hidden');
+
+                const guestHTML = `
                     <button onclick="navigateTo('login')" class="text-xs font-semibold text-gray-700 hover:text-ebay-blue px-3 py-2">
                         Sign In
                     </button>
@@ -712,10 +700,18 @@
                         Register
                     </button>
                 `;
+
+                container.innerHTML = guestHTML;
+                mobileContainer.innerHTML = `
+                    <div class="flex flex-col space-y-2 pt-2">
+                        <button onclick="navigateTo('login'); toggleMobileMenu();" class="w-full text-left px-3 py-2 text-sm font-semibold text-gray-700">Sign In</button>
+                        <button onclick="navigateTo('register'); toggleMobileMenu();" class="w-full text-center py-2 text-sm bg-ebay-blue text-white rounded-lg font-semibold">Register</button>
+                    </div>
+                `;
             }
         }
 
-        // ================= AUTHENTICATION ACTIONS =================
+        // AUTHENTICATION LOGIC
         function toggleAdminLoginView() {
             state.isAdminLoginMode = !state.isAdminLoginMode;
             const heading = document.getElementById('login-form-heading');
@@ -728,7 +724,7 @@
                 toggleBtn.innerHTML = `<i class="fa-solid fa-graduation-cap text-[10px] mr-1"></i> Student Login`;
             } else {
                 heading.textContent = 'Sign In to LMS';
-                subheading.textContent = 'Access your eBay student learning portal';
+                subheading.textContent = 'Access your student learning portal';
                 toggleBtn.innerHTML = `<i class="fa-solid fa-lock text-[10px] mr-1"></i> Admin Login`;
             }
         }
@@ -740,13 +736,13 @@
             const password = document.getElementById('reg-password').value;
 
             if (email === state.adminCredentials.email) {
-                showToast("Cannot register with admin email address", "error");
+                showToast("Cannot register using admin email address", "error");
                 return;
             }
 
             const existing = state.students.find(s => s.email === email);
             if (existing) {
-                showToast("Account with this email already exists", "error");
+                showToast("An account with this email already exists", "error");
                 return;
             }
 
@@ -755,13 +751,12 @@
                 name: name,
                 email: email,
                 password: password,
-                status: 'pending' // Mandatory Default Requirement
+                status: 'pending'
             };
 
             state.students.push(newStudent);
             saveState();
 
-            // Auto Log-in as Pending Student
             state.currentUser = {
                 role: 'student',
                 id: newStudent.id,
@@ -771,7 +766,7 @@
             };
             saveState();
 
-            showToast("Registration successful! Account is pending approval.", "info");
+            showToast("Registration successful! Account pending admin approval.", "info");
             document.getElementById('register-form').reset();
             navigateTo('status-screen');
         }
@@ -781,7 +776,6 @@
             const email = document.getElementById('login-email').value.trim().toLowerCase();
             const password = document.getElementById('login-password').value;
 
-            // Admin Login Switch Check
             if (email === state.adminCredentials.email && password === state.adminCredentials.password) {
                 state.currentUser = {
                     role: 'admin',
@@ -795,7 +789,6 @@
                 return;
             }
 
-            // Student Login Check
             const student = state.students.find(s => s.email === email && s.password === password);
             if (student) {
                 state.currentUser = {
@@ -818,7 +811,7 @@
             }
         }
 
-        // ================= ADMIN PASSWORD CHANGE =================
+        // ADMIN PASSWORD MODAL
         function openChangePasswordModal() {
             document.getElementById('password-modal').classList.remove('hidden');
             document.getElementById('change-password-form').reset();
@@ -862,11 +855,6 @@
             navigateTo('home');
         }
 
-        function fillAdminCredentials() {
-            document.getElementById('login-email').value = ADMIN_CREDENTIALS.email;
-            document.getElementById('login-password').value = ADMIN_CREDENTIALS.password;
-        }
-
         function checkStatusRefresh() {
             if (!state.currentUser || state.currentUser.role !== 'student') return;
             const updated = state.students.find(s => s.id === state.currentUser.id);
@@ -874,16 +862,15 @@
                 state.currentUser.status = updated.status;
                 saveState();
                 if (updated.status === 'approved') {
-                    showToast("Great news! Your account has been approved!", "success");
+                    showToast("Account approved!", "success");
                     navigateTo('portal');
                 } else {
                     renderStatusScreen();
-                    showToast("Status is still " + updated.status, "info");
+                    showToast("Current status: " + updated.status, "info");
                 }
             }
         }
 
-        // ================= PAGE 4 RENDER: STATUS SCREEN =================
         function renderStatusScreen() {
             if (!state.currentUser || state.currentUser.role !== 'student') return;
             
@@ -902,11 +889,12 @@
             }
         }
 
-        // ================= PAGE 5 RENDER: ADMIN DASHBOARD =================
-        function renderAdminDashboard() {
-            // Stats Calculations
+        // ADMIN DASHBOARD
+        async function renderAdminDashboard() {
             const totalStudents = state.students.length;
             const pendingStudents = state.students.filter(s => s.status === 'pending').length;
+            
+            state.videos = await getVideosFromIDB();
             const totalVideos = state.videos.length;
 
             document.getElementById('stat-total-students').textContent = totalStudents;
@@ -914,10 +902,9 @@
             document.getElementById('stat-total-videos').textContent = totalVideos;
             document.getElementById('admin-video-count').textContent = totalVideos;
 
-            // Render Students Table
             const tbody = document.getElementById('admin-students-table-body');
             if (state.students.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="3" class="p-4 text-center text-gray-400">No students registered yet.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="3" class="p-6 text-center text-gray-400">No student accounts registered yet.</td></tr>`;
             } else {
                 tbody.innerHTML = state.students.map(s => {
                     let badgeClass = '';
@@ -937,13 +924,13 @@
                                 </span>
                             </td>
                             <td class="p-4 text-right space-x-1">
-                                <button onclick="updateStudentStatus('${s.id}', 'approved')" title="Approve" class="bg-green-600 hover:bg-green-700 text-white px-2.5 py-1 rounded text-xs font-semibold">
+                                <button onclick="updateStudentStatus('${s.id}', 'approved')" title="Approve Student" class="bg-green-600 hover:bg-green-700 text-white px-2.5 py-1 rounded text-xs font-semibold">
                                     Approve
                                 </button>
-                                <button onclick="updateStudentStatus('${s.id}', 'rejected')" title="Reject" class="bg-amber-500 hover:bg-amber-600 text-white px-2.5 py-1 rounded text-xs font-semibold">
+                                <button onclick="updateStudentStatus('${s.id}', 'rejected')" title="Reject Account" class="bg-amber-500 hover:bg-amber-600 text-white px-2.5 py-1 rounded text-xs font-semibold">
                                     Reject
                                 </button>
-                                <button onclick="updateStudentStatus('${s.id}', 'blocked')" title="Block" class="bg-gray-800 hover:bg-black text-white px-2.5 py-1 rounded text-xs font-semibold">
+                                <button onclick="updateStudentStatus('${s.id}', 'blocked')" title="Block Student" class="bg-gray-800 hover:bg-black text-white px-2.5 py-1 rounded text-xs font-semibold">
                                     Block
                                 </button>
                                 <button onclick="deleteStudent('${s.id}')" title="Delete Account" class="bg-red-100 text-red-600 hover:bg-red-200 px-2.5 py-1 rounded text-xs font-semibold">
@@ -955,10 +942,9 @@
                 }).join('');
             }
 
-            // Render Admin Video List
             const videoList = document.getElementById('admin-videos-list');
             if (state.videos.length === 0) {
-                videoList.innerHTML = `<div class="text-xs text-gray-400 text-center py-4">No video lessons published.</div>`;
+                videoList.innerHTML = `<div class="text-xs text-gray-400 text-center py-4">No video lessons published yet.</div>`;
             } else {
                 videoList.innerHTML = state.videos.map(v => `
                     <div class="p-3 bg-gray-50 border border-gray-200 rounded-lg flex justify-between items-start">
@@ -980,12 +966,12 @@
                 student.status = newStatus;
                 saveState();
                 renderAdminDashboard();
-                showToast(`Student status updated to ${newStatus}`, "info");
+                showToast(`Student account set to ${newStatus}`, "info");
             }
         }
 
         function deleteStudent(studentId) {
-            if (confirm("Are you sure you want to delete this student account?")) {
+            if (confirm("Are you sure you want to delete this student?")) {
                 state.students = state.students.filter(s => s.id !== studentId);
                 saveState();
                 renderAdminDashboard();
@@ -993,70 +979,76 @@
             }
         }
 
-        // ================= VIDEO UPLOADER =================
-        function handleVideoUpload(e) {
+        // VIDEO UPLOADER (INDEXEDDB BINARY BLOB)
+        async function handleVideoUpload(e) {
             e.preventDefault();
             const title = document.getElementById('video-title').value.trim();
             const desc = document.getElementById('video-desc').value.trim();
             const fileInput = document.getElementById('video-file');
 
-            if (!title) return;
-
-            let videoSrcUrl = 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4';
-
-            if (fileInput.files && fileInput.files[0]) {
-                const file = fileInput.files[0];
-                videoSrcUrl = URL.createObjectURL(file); // Store local blob URL for video session
+            if (!fileInput.files || !fileInput.files[0]) {
+                showToast("Please select an MP4 video file", "warning");
+                return;
             }
 
-            const newVideo = {
-                id: 'vid-' + Date.now(),
-                title: title,
-                description: desc,
-                url: videoSrcUrl
-            };
+            const file = fileInput.files[0];
+            const uploadBtn = document.getElementById('upload-btn');
+            uploadBtn.disabled = true;
+            uploadBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin mr-2"></i> Uploading MP4...`;
 
-            state.videos.push(newVideo);
-            saveState();
-            
-            document.getElementById('video-upload-form').reset();
-            renderAdminDashboard();
-            showToast("New video published to LMS!", "success");
+            try {
+                const newVideo = {
+                    id: 'vid-' + Date.now(),
+                    title: title,
+                    description: desc,
+                    fileBlob: file,
+                    createdAt: new Date().toISOString()
+                };
+
+                await saveVideoToIDB(newVideo);
+                document.getElementById('video-upload-form').reset();
+                showToast("Video uploaded and published successfully!", "success");
+                renderAdminDashboard();
+            } catch (err) {
+                console.error("Upload error:", err);
+                showToast("Failed to store video locally", "error");
+            } finally {
+                uploadBtn.disabled = false;
+                uploadBtn.innerHTML = `<i class="fa-solid fa-plus mr-1.5"></i> Publish Video Lesson`;
+            }
         }
 
-        function deleteVideo(videoId) {
-            if (confirm("Remove this video from student portal?")) {
-                state.videos = state.videos.filter(v => v.id !== videoId);
+        async function deleteVideo(videoId) {
+            if (confirm("Delete this video from the LMS?")) {
+                await deleteVideoFromIDB(videoId);
                 if (state.activeVideoId === videoId) state.activeVideoId = null;
-                saveState();
                 renderAdminDashboard();
                 showToast("Video deleted", "info");
             }
         }
 
-        // ================= PAGE 6 RENDER: VIDEO PORTAL =================
-        function renderPortal() {
+        // VIDEO LEARNING PORTAL RENDER
+        async function renderPortal() {
             const playlistContainer = document.getElementById('student-playlist');
             const playerTitle = document.getElementById('player-title');
             const playerDesc = document.getElementById('player-description');
             const videoPlayer = document.getElementById('main-video-player');
 
+            state.videos = await getVideosFromIDB();
             document.getElementById('playlist-count').textContent = `${state.videos.length} Videos`;
 
             if (state.videos.length === 0) {
-                playlistContainer.innerHTML = `<div class="p-4 text-center text-xs text-gray-400">No videos available yet.</div>`;
-                playerTitle.textContent = "No Videos Available";
-                playerDesc.textContent = "An administrator has not uploaded any lessons yet.";
+                playlistContainer.innerHTML = `<div class="p-6 text-center text-xs text-gray-400">No course videos published yet.</div>`;
+                playerTitle.textContent = "No Videos Uploaded";
+                playerDesc.textContent = "The administrator has not uploaded any video lessons yet.";
                 videoPlayer.removeAttribute('src');
                 return;
             }
 
-            // Set default active video if none selected
             if (!state.activeVideoId || !state.videos.some(v => v.id === state.activeVideoId)) {
                 state.activeVideoId = state.videos[0].id;
             }
 
-            // Render playlist list
             playlistContainer.innerHTML = state.videos.map(v => {
                 const isActive = v.id === state.activeVideoId;
                 return `
@@ -1076,14 +1068,12 @@
                 `;
             }).join('');
 
-            // Load active video into player
             const currentVideo = state.videos.find(v => v.id === state.activeVideoId);
-            if (currentVideo) {
-                if (videoPlayer.src !== currentVideo.url) {
-                    videoPlayer.src = currentVideo.url;
-                }
+            if (currentVideo && currentVideo.fileBlob) {
+                const blobUrl = URL.createObjectURL(currentVideo.fileBlob);
+                videoPlayer.src = blobUrl;
                 playerTitle.textContent = currentVideo.title;
-                playerDesc.textContent = currentVideo.description || 'No description provided for this lesson.';
+                playerDesc.textContent = currentVideo.description || 'No description provided.';
             }
         }
 
@@ -1091,10 +1081,10 @@
             state.activeVideoId = videoId;
             renderPortal();
             const videoPlayer = document.getElementById('main-video-player');
-            videoPlayer.play().catch(() => {}); // Handle auto-play policies gracefully
+            videoPlayer.play().catch(() => {});
         }
 
-        // ================= TOAST NOTIFICATION SYSTEM =================
+        // TOAST NOTIFICATIONS
         function showToast(message, type = 'info') {
             const container = document.getElementById('toast-container');
             const toast = document.createElement('div');
@@ -1105,9 +1095,7 @@
             if (type === 'warning') bgColors = 'bg-amber-500 text-white';
 
             toast.className = `${bgColors} px-4 py-3 rounded-xl shadow-2xl text-xs font-semibold flex items-center space-x-2 transition-all transform translate-y-2 pointer-events-auto`;
-            toast.innerHTML = `
-                <span>${escapeHtml(message)}</span>
-            `;
+            toast.innerHTML = `<span>${escapeHtml(message)}</span>`;
 
             container.appendChild(toast);
 
@@ -1117,7 +1105,6 @@
             }, 3000);
         }
 
-        // Helper: HTML Escaper
         function escapeHtml(str) {
             if (!str) return '';
             return str.replace(/[&<>"']/g, function(m) {
@@ -1131,18 +1118,16 @@
             });
         }
 
-        // ================= APP INITIALIZATION =================
-        window.onload = function() {
+        // APP INIT
+        window.onload = async function() {
+            await initIndexedDB();
             loadState();
             renderApp();
-            
-            // Set dynamic footer year
             document.getElementById('copyright-year').textContent = new Date().getFullYear();
         };
 
         function renderApp() {
             renderNavbar();
-            // Default to home page on initial landing if no active route
             navigateTo('home');
         }
     </script>
